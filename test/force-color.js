@@ -46,7 +46,7 @@ test('`FORCE_COLOR=0` disables color', async t => {
 test('`FORCE_COLOR=true` only enables color and lets the level be detected', async t => {
 	t.is(await detectLevel({FORCE_COLOR: 'true', COLORTERM: 'truecolor'}), '3');
 	t.is(await detectLevel({FORCE_COLOR: 'true', TERM: 'xterm-256color'}), '2');
-	t.is(await detectLevel({FORCE_COLOR: 'true'}), '1');
+	t.is(await detectLevel({FORCE_COLOR: 'true', TERM: 'dumb'}), '1');
 });
 
 test('an empty `FORCE_COLOR` behaves like `FORCE_COLOR=true`', async t => {

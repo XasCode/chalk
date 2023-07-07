@@ -11,7 +11,7 @@ function hasFlag(flag, argv = globalThis.Deno ? globalThis.Deno.args : process.a
 	return position !== -1 && (terminatorPosition === -1 || position < terminatorPosition);
 }
 
-const {env} = process;
+const { env } = process;
 
 let flagForceColor;
 if (
@@ -68,7 +68,7 @@ function translateLevel(level) {
 	};
 }
 
-function _supportsColor(haveStream, {streamIsTTY, sniffFlags = true} = {}) {
+function _supportsColor(haveStream, { streamIsTTY, sniffFlags = true } = {}) {
 	const noFlagForceColor = envForceColor();
 	if (noFlagForceColor !== undefined) {
 		flagForceColor = noFlagForceColor;
@@ -111,6 +111,10 @@ function _supportsColor(haveStream, {streamIsTTY, sniffFlags = true} = {}) {
 
 	if (env.TERM === 'dumb') {
 		return min;
+	}
+
+	if (/-256(?:color)?$/i.test(env.TERM)) {
+		return 2;
 	}
 
 	if (process.platform === 'win32') {
@@ -174,10 +178,6 @@ function _supportsColor(haveStream, {streamIsTTY, sniffFlags = true} = {}) {
 		}
 	}
 
-	if (/-256(?:color)?$/i.test(env.TERM)) {
-		return 2;
-	}
-
 	if (/^screen|^xterm|^vt100|^vt220|^rxvt|color|ansi|cygwin|linux/i.test(env.TERM)) {
 		return 1;
 	}
@@ -199,8 +199,8 @@ export function createSupportsColor(stream, options = {}) {
 }
 
 const supportsColor = {
-	stdout: createSupportsColor({isTTY: tty.isatty(1)}),
-	stderr: createSupportsColor({isTTY: tty.isatty(2)}),
+	stdout: createSupportsColor({ isTTY: tty.isatty(1) }),
+	stderr: createSupportsColor({ isTTY: tty.isatty(2) }),
 };
 
 export default supportsColor;
