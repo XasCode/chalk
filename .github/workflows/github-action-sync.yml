@@ -11,7 +11,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v1
       - name: Create PR to branch
-        uses: xascode/github-action-sync@main
+        uses: xascode/github-action-sync@master
         with:
           upstream: ${{ vars.SYNC_UPSTREAM }}
           upstream_branch: ${{ vars.SYNC_UPSTREAM_BRANCH }}
