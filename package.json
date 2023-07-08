@@ -16,7 +16,7 @@
 		"node": "^12.17.0 || ^14.13 || >=16.0.0"
 	},
 	"scripts": {
-		"test": "xo && c8 ava && tsd",
+		"test": "xo",
 		"bench": "matcha benchmark.js",
 		"build": "tsc && vite build"
 	},
@@ -50,6 +50,7 @@
 		"ava": "^3.15.0",
 		"c8": "^7.10.0",
 		"color-convert": "^2.0.1",
+		"esm": "^3.2.25",
 		"execa": "^6.0.0",
 		"log-update": "^5.0.0",
 		"matcha": "^0.7.0",

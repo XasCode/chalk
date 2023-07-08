@@ -1,6 +1,6 @@
-/// <reference types="vitest" />
-
-import {resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {resolve, dirname} from 'node:path';
+import * as vitest from 'vitest';
 import {defineConfig} from 'vite';
 import dts from 'vite-plugin-dts';
 
@@ -25,7 +25,7 @@ const externals = [
 export default defineConfig({
 	build: {
 		lib: {
-			entry: resolve(__dirname, 'source/index.js'),
+			entry: resolve(dirname(fileURLToPath(import.meta.url)), 'source/index.js'),
 		},
 		rollupOptions: {
 			output: [
