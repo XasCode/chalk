@@ -16,7 +16,7 @@ jobs:
           upstream: ${{ vars.SYNC_UPSTREAM }}
           upstream_branch: ${{ vars.SYNC_UPSTREAM_BRANCH }}
           branch: ${{ vars.SYNC_BRANCH }}
-          pr_labels: ${{ VARS_SYNC_LABELS }}
+          pr_labels: ${{ vars.SYNC_LABELS }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITBOT_EMAIL: ${{ vars.SYNC_EMAIL }}
