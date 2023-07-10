@@ -2,7 +2,7 @@ name: Pull upstream
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron: "0 * * * *"
+    - cron: "* 1 * * *"
 jobs:
   release_pull_request:
     runs-on: ubuntu-latest
