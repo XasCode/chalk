@@ -5,20 +5,29 @@
 	"license": "MIT",
 	"repository": "XasCode/chalk",
 	"funding": "https://github.com/chalk/chalk?sponsor=1",
-	"type": "commonjs",
-	"main": "./dist/index.js",
+	"main": "./dist/cjs/index.js",
+	"module": "./dist/esm/index.js",
+	"type": "module",
 	"imports": {
 		"#ansi-styles": "./source/vendor/ansi-styles/index.js",
 		"#supports-color": "./source/vendor/supports-color/index.js"
+	},
+	"exports": {
+		".": {
+			"import": "./dist/esm/index.js",
+			"require": "./dist/cjs/index.js"
+		}
 	},
 	"types": "./dist/source/index.d.ts",
 	"engines": {
 		"node": "^12.17.0 || ^14.13 || >=16.0.0"
 	},
 	"scripts": {
-		"test": "xo",
 		"bench": "matcha benchmark.js",
-		"build": "tsc && vite build"
+		"build": "rm -rf dist && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && vite build && npm run build:cjs && npm run build:mjs",
+		"build:cjs": "echo { \"type\": \"commonjs\" } > dist/cjs/package.json",
+		"build:mjs": "echo { \"type\": \"module\" } > dist/esm/package.json",
+		"test": "vitest run --coverage --reporter dot"
 	},
 	"files": [
 		"dist"
@@ -47,6 +56,7 @@
 	],
 	"devDependencies": {
 		"@types/node": "^16.11.10",
+		"@vitest/coverage-istanbul": "^0.33.0",
 		"ava": "^3.15.0",
 		"c8": "^7.10.0",
 		"color-convert": "^2.0.1",
@@ -54,6 +64,7 @@
 		"log-update": "^5.0.0",
 		"matcha": "^0.7.0",
 		"tsd": "^0.19.0",
+		"vitest": "^0.33.0",
 		"xo": "^0.53.0",
 		"yoctodelay": "^2.0.0"
 	},
@@ -82,7 +93,6 @@
 		"lodash": "^4.17.21",
 		"vite": "^4.3.9",
 		"vite-plugin-commonjs-externals": "^0.1.3",
-		"vite-plugin-dts": "^3.1.0",
-		"vitest": "^0.32.4"
+		"vite-plugin-dts": "^3.1.0"
 	}
 }

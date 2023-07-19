@@ -1,5 +1,8 @@
-import test from 'ava';
+import { test, expect } from 'vitest';
 import chalk from '../source/index.js';
+const e = {
+	is: (a, b) => (expect(a).toBe(b)),
+}
 
 // TODO: Do this when ESM supports loader hooks
 // Spoof supports-color
@@ -20,5 +23,5 @@ import chalk from '../source/index.js';
 
 test('colors can be forced by using chalk.level', t => {
 	chalk.level = 1;
-	t.is(chalk.green('hello'), '\u001B[32mhello\u001B[39m');
+	e.is(chalk.green('hello'), '\u001B[32mhello\u001B[39m');
 });

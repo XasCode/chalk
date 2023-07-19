@@ -33,12 +33,18 @@ export default defineConfig({
 					format: 'umd',
 					name: 'chalk',
 					entryFileNames(_chunk) {
-						return '[name].js';
+						//return '[name].js';
+						return 'cjs/index.js';
 					},
 					exports: 'named',
 				},
 				{
 					format: 'es',
+					name: 'chalk',
+					entryFileNames(_chunk) {
+						//return '[name].js';
+						return 'esm/index.js';
+					}
 				},
 			],
 		},
@@ -56,6 +62,11 @@ export default defineConfig({
 		coverage: {
 			provider: 'istanbul',
 			reporter: ['text', 'json', 'html', 'lcov'],
+			include: ['source'],
+			exclude: ['source/vendor'],
 		},
+		environment: `node`,
+		include: ['test/**/*.js', 'test/**/*.mjs'],
+		exclude: ['test/**/_*.js']
 	},
 });
