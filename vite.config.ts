@@ -1,6 +1,7 @@
+/// <reference types="vitest" />
+
 import {fileURLToPath} from 'node:url';
 import {resolve, dirname} from 'node:path';
-import * as vitest from 'vitest';
 import {defineConfig} from 'vite';
 import dts from 'vite-plugin-dts';
 
@@ -56,6 +57,11 @@ export default defineConfig({
 		coverage: {
 			provider: 'istanbul',
 			reporter: ['text', 'json', 'html', 'lcov'],
+			include: ['source'],
+			exclude: ['source/vendor'],
 		},
+		environment: 'node',
+		include: ['test/**/*.js'],
+		exclude: ['test/**/_*.js'],
 	},
 });

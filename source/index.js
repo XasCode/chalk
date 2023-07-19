@@ -5,7 +5,7 @@ import {
 import ansiStyles from '#ansi-styles';
 import supportsColor from '#supports-color';
 
-const {stdout: stdoutColor, stderr: stderrColor} = supportsColor;
+const { stdout: stdoutColor, stderr: stderrColor } = supportsColor;
 
 const GENERATOR = Symbol('GENERATOR');
 const STYLER = Symbol('STYLER');
@@ -69,7 +69,7 @@ for (const [styleName, style] of Object.entries(ansiStyles)) {
 	styles[styleName] = {
 		get() {
 			const builder = createBuilder(this, createStyler(style.open, style.close, this[STYLER]), this[IS_EMPTY]);
-			Object.defineProperty(this, styleName, {value: builder});
+			Object.defineProperty(this, styleName, { value: builder });
 			return builder;
 		},
 	};
@@ -78,7 +78,7 @@ for (const [styleName, style] of Object.entries(ansiStyles)) {
 styles.visible = {
 	get() {
 		const builder = createBuilder(this, this[STYLER], true);
-		Object.defineProperty(this, 'visible', {value: builder});
+		Object.defineProperty(this, 'visible', { value: builder });
 		return builder;
 	},
 };
@@ -238,7 +238,7 @@ const applyStyle = (self, string) => {
 Object.defineProperties(createChalk.prototype, {...styles, level: levelDescriptor});
 
 const chalk = createChalk();
-export const chalkStderr = createChalk({level: stderrColor ? stderrColor.level : 0});
+export const chalkStderr = createChalk({ level: stderrColor ? stderrColor.level : 0 });
 
 export {
 	modifierNames,

@@ -1,9 +1,6 @@
 {
-  "extends": "./tsconfig-base.json",
   "compilerOptions": {
-    "target": "ESNext",
     "useDefineForClassFields": true,
-    "module": "ESNext",
     "lib": [
       "ESNext",
       "DOM"
@@ -20,8 +17,7 @@
     "skipLibCheck": true
   },
   "include": [
-    "source",
-    "vite.config.ts"
+    "source"
   ],
   "exclude": [
     "node_modules",
