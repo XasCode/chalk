@@ -21,6 +21,9 @@
 	},
 	"sideEffects": false,
 	"types": "./dist/source/index.d.ts",
+	"engines": {
+		"node": ">=22"
+	},
 	"scripts": {
 		"test": "vitest run --coverage --reporter dot",
 		"bench": "matcha benchmark.js",
