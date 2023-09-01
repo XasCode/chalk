@@ -59,7 +59,7 @@
 		"color-convert": "^2.0.1",
 		"execa": "^7.1.1",
 		"log-update": "^5.0.0",
-		"tsd": "^0.28.1",
+		"tsd": "^0.29.0",
 		"vitest": "^0.33.0",
 		"yoctodelay": "^2.0.0"
 	},
