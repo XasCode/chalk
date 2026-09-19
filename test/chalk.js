@@ -107,6 +107,7 @@ test('properly convert RGB to 256 colors on basic color terminals', t => {
 	e.is(new Chalk({ level: 2 }).hex('#FF0000')('hello'), '\u001B[38;5;196mhello\u001B[39m');
 	e.is(new Chalk({ level: 2 }).bgHex('#FF0000')('hello'), '\u001B[48;5;196mhello\u001B[49m');
 	e.is(new Chalk({ level: 3 }).bgHex('#FF0000')('hello'), '\u001B[48;2;255;0;0mhello\u001B[49m');
+	e.is(new Chalk({ level: 2 }).ansi256(196)('hello'), '\u001B[38;5;196mhello\u001B[39m');
 });
 
 test('don\'t emit RGB codes if level is 0', t => {
