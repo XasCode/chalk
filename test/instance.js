@@ -9,7 +9,7 @@ const e = {
 chalk.level = 1;
 
 test('create an isolated context where colors can be disabled (by level)', t => {
-	const instance = new Chalk({level: 0});
+	const instance = new Chalk({ level: 0 });
 	e.is(instance.red('foo'), 'foo');
 	e.is(chalk.red('foo'), '\u{1B}[31mfoo\u{1B}[39m');
 	instance.level = 2;
@@ -19,33 +19,33 @@ test('create an isolated context where colors can be disabled (by level)', t => 
 test('the `level` option should be a number from 0 to 3', t => {
 	/* eslint-disable no-new -- Ignore */
 	e.throws(() => {
-		new Chalk({level: 10});
-	}, {message: /should be an integer from 0 to 3/v});
+		new Chalk({ level: 10 });
+	}, { message: /should be an integer from 0 to 3/v });
 
 	e.throws(() => {
-		new Chalk({level: -1});
-	}, {message: /should be an integer from 0 to 3/v});
+		new Chalk({ level: -1 });
+	}, { message: /should be an integer from 0 to 3/v });
 	/* eslint-enable no-new */
 });
 
 test('an omitted `level` option is detected rather than rejected', t => {
-	e.is(new Chalk({level: undefined}).level, new Chalk().level);
+	e.is(new Chalk({ level: undefined }).level, new Chalk().level);
 });
 
 test('assigning `level` is validated', t => {
-	const instance = new Chalk({level: 1});
+	const instance = new Chalk({ level: 1 });
 
 	// Unlike the option, `undefined` is not a way to ask for detection here
 	for (const level of [10, -1, 1.5, ' 1', undefined]) {
 		e.throws(() => {
 			instance.level = level;
-		}, {message: /should be an integer from 0 to 3/v}, `level: ${level}`);
+		}, { message: /should be an integer from 0 to 3/v }, `level: ${level}`);
 	}
 
 	// A style in the chain writes through to the instance, so it is validated too
 	e.throws(() => {
 		instance.red.level = 10;
-	}, {message: /should be an integer from 0 to 3/v});
+	}, { message: /should be an integer from 0 to 3/v });
 
 	e.is(instance.level, 1);
 
@@ -55,7 +55,7 @@ test('assigning `level` is validated', t => {
 });
 
 test('a cached model style keeps following the level', t => {
-	const instance = new Chalk({level: 3});
+	const instance = new Chalk({ level: 3 });
 
 	// Reading it once installs the cached function on the instance
 	e.is(instance.rgb, instance.rgb);
@@ -69,8 +69,8 @@ test('a cached model style keeps following the level', t => {
 });
 
 test('a model style cached on a style in the chain keeps following the level', t => {
-	const instance = new Chalk({level: 3});
-	const {bold} = instance;
+	const instance = new Chalk({ level: 3 });
+	const { bold } = instance;
 
 	// The cache is installed on the builder here, not on the instance
 	e.is(bold.rgb, bold.rgb);
@@ -81,7 +81,7 @@ test('a model style cached on a style in the chain keeps following the level', t
 });
 
 test('a deep chain reads the level from the instance it started on', t => {
-	const instance = new Chalk({level: 1});
+	const instance = new Chalk({ level: 1 });
 	const chain = instance.red.bold.underline;
 
 	e.is(chain.level, 1);

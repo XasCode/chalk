@@ -1,5 +1,5 @@
 import process from 'node:process';
-import {test, expect} from 'vitest';
+import { test, expect } from 'vitest';
 import chalk, {
 	Chalk,
 	chalkStderr,
@@ -122,48 +122,48 @@ test('line breaks should open and close colors with CRLF', t => {
 });
 
 test('properly convert RGB to 16 colors on basic color terminals', t => {
-	e.is(new Chalk({level: 1}).rgb(255, 0, 0)('hello'), '\u{1B}[91mhello\u{1B}[39m');
-	e.is(new Chalk({level: 1}).bgRgb(255, 0, 0)('hello'), '\u{1B}[101mhello\u{1B}[49m');
-	e.is(new Chalk({level: 1}).hex('#FF0000')('hello'), '\u{1B}[91mhello\u{1B}[39m');
-	e.is(new Chalk({level: 1}).bgHex('#FF0000')('hello'), '\u{1B}[101mhello\u{1B}[49m');
+	e.is(new Chalk({ level: 1 }).rgb(255, 0, 0)('hello'), '\u{1B}[91mhello\u{1B}[39m');
+	e.is(new Chalk({ level: 1 }).bgRgb(255, 0, 0)('hello'), '\u{1B}[101mhello\u{1B}[49m');
+	e.is(new Chalk({ level: 1 }).hex('#FF0000')('hello'), '\u{1B}[91mhello\u{1B}[39m');
+	e.is(new Chalk({ level: 1 }).bgHex('#FF0000')('hello'), '\u{1B}[101mhello\u{1B}[49m');
 });
 
 test('properly convert RGB to 256 colors on basic color terminals', t => {
-	e.is(new Chalk({level: 2}).rgb(255, 0, 0)('hello'), '\u{1B}[38;5;196mhello\u{1B}[39m');
-	e.is(new Chalk({level: 2}).bgRgb(255, 0, 0)('hello'), '\u{1B}[48;5;196mhello\u{1B}[49m');
-	e.is(new Chalk({level: 3}).rgb(255, 0, 0)('hello'), '\u{1B}[38;2;255;0;0mhello\u{1B}[39m');
-	e.is(new Chalk({level: 3}).bgRgb(255, 0, 0)('hello'), '\u{1B}[48;2;255;0;0mhello\u{1B}[49m');
-	e.is(new Chalk({level: 2}).hex('#FF0000')('hello'), '\u{1B}[38;5;196mhello\u{1B}[39m');
-	e.is(new Chalk({level: 2}).bgHex('#FF0000')('hello'), '\u{1B}[48;5;196mhello\u{1B}[49m');
-	e.is(new Chalk({level: 3}).bgHex('#FF0000')('hello'), '\u{1B}[48;2;255;0;0mhello\u{1B}[49m');
+	e.is(new Chalk({ level: 2 }).rgb(255, 0, 0)('hello'), '\u{1B}[38;5;196mhello\u{1B}[39m');
+	e.is(new Chalk({ level: 2 }).bgRgb(255, 0, 0)('hello'), '\u{1B}[48;5;196mhello\u{1B}[49m');
+	e.is(new Chalk({ level: 3 }).rgb(255, 0, 0)('hello'), '\u{1B}[38;2;255;0;0mhello\u{1B}[39m');
+	e.is(new Chalk({ level: 3 }).bgRgb(255, 0, 0)('hello'), '\u{1B}[48;2;255;0;0mhello\u{1B}[49m');
+	e.is(new Chalk({ level: 2 }).hex('#FF0000')('hello'), '\u{1B}[38;5;196mhello\u{1B}[39m');
+	e.is(new Chalk({ level: 2 }).bgHex('#FF0000')('hello'), '\u{1B}[48;5;196mhello\u{1B}[49m');
+	e.is(new Chalk({ level: 3 }).bgHex('#FF0000')('hello'), '\u{1B}[48;2;255;0;0mhello\u{1B}[49m');
 });
 
 test('properly convert ANSI 256 to 16 colors on basic color terminals', t => {
-	e.is(new Chalk({level: 1}).ansi256(196)('hello'), '\u{1B}[91mhello\u{1B}[39m');
-	e.is(new Chalk({level: 1}).bgAnsi256(196)('hello'), '\u{1B}[101mhello\u{1B}[49m');
-	e.is(new Chalk({level: 1}).ansi256(2)('hello'), '\u{1B}[32mhello\u{1B}[39m');
-	e.is(new Chalk({level: 1}).bgAnsi256(2)('hello'), '\u{1B}[42mhello\u{1B}[49m');
-	e.is(new Chalk({level: 1}).ansi256(8)('hello'), '\u{1B}[90mhello\u{1B}[39m');
-	e.is(new Chalk({level: 1}).ansi256(232)('hello'), '\u{1B}[30mhello\u{1B}[39m');
-	e.is(new Chalk({level: 1}).ansi256(255)('hello'), '\u{1B}[37mhello\u{1B}[39m');
+	e.is(new Chalk({ level: 1 }).ansi256(196)('hello'), '\u{1B}[91mhello\u{1B}[39m');
+	e.is(new Chalk({ level: 1 }).bgAnsi256(196)('hello'), '\u{1B}[101mhello\u{1B}[49m');
+	e.is(new Chalk({ level: 1 }).ansi256(2)('hello'), '\u{1B}[32mhello\u{1B}[39m');
+	e.is(new Chalk({ level: 1 }).bgAnsi256(2)('hello'), '\u{1B}[42mhello\u{1B}[49m');
+	e.is(new Chalk({ level: 1 }).ansi256(8)('hello'), '\u{1B}[90mhello\u{1B}[39m');
+	e.is(new Chalk({ level: 1 }).ansi256(232)('hello'), '\u{1B}[30mhello\u{1B}[39m');
+	e.is(new Chalk({ level: 1 }).ansi256(255)('hello'), '\u{1B}[37mhello\u{1B}[39m');
 });
 
 test('keep ANSI 256 colors on 256 color and Truecolor terminals', t => {
-	e.is(new Chalk({level: 2}).ansi256(196)('hello'), '\u{1B}[38;5;196mhello\u{1B}[39m');
-	e.is(new Chalk({level: 2}).bgAnsi256(196)('hello'), '\u{1B}[48;5;196mhello\u{1B}[49m');
-	e.is(new Chalk({level: 3}).ansi256(196)('hello'), '\u{1B}[38;5;196mhello\u{1B}[39m');
-	e.is(new Chalk({level: 3}).bgAnsi256(196)('hello'), '\u{1B}[48;5;196mhello\u{1B}[49m');
+	e.is(new Chalk({ level: 2 }).ansi256(196)('hello'), '\u{1B}[38;5;196mhello\u{1B}[39m');
+	e.is(new Chalk({ level: 2 }).bgAnsi256(196)('hello'), '\u{1B}[48;5;196mhello\u{1B}[49m');
+	e.is(new Chalk({ level: 3 }).ansi256(196)('hello'), '\u{1B}[38;5;196mhello\u{1B}[39m');
+	e.is(new Chalk({ level: 3 }).bgAnsi256(196)('hello'), '\u{1B}[48;5;196mhello\u{1B}[49m');
 });
 
 test('don\'t emit color codes if level is 0', t => {
-	e.is(new Chalk({level: 0}).hex('#FF0000')('hello'), 'hello');
-	e.is(new Chalk({level: 0}).bgHex('#FF0000')('hello'), 'hello');
-	e.is(new Chalk({level: 0}).ansi256(196)('hello'), 'hello');
-	e.is(new Chalk({level: 0}).bgAnsi256(196)('hello'), 'hello');
-	e.is(new Chalk({level: 0}).underlineHex('#FF0000')('hello'), 'hello');
-	e.is(new Chalk({level: 0}).underlineAnsi256(196)('hello'), 'hello');
-	e.is(new Chalk({level: 0}).underlineRed('hello'), 'hello');
-	e.is(new Chalk({level: 0}).underlineCurly('hello'), 'hello');
+	e.is(new Chalk({ level: 0 }).hex('#FF0000')('hello'), 'hello');
+	e.is(new Chalk({ level: 0 }).bgHex('#FF0000')('hello'), 'hello');
+	e.is(new Chalk({ level: 0 }).ansi256(196)('hello'), 'hello');
+	e.is(new Chalk({ level: 0 }).bgAnsi256(196)('hello'), 'hello');
+	e.is(new Chalk({ level: 0 }).underlineHex('#FF0000')('hello'), 'hello');
+	e.is(new Chalk({ level: 0 }).underlineAnsi256(196)('hello'), 'hello');
+	e.is(new Chalk({ level: 0 }).underlineRed('hello'), 'hello');
+	e.is(new Chalk({ level: 0 }).underlineCurly('hello'), 'hello');
 });
 
 test('support extended underline styles', t => {
@@ -204,21 +204,21 @@ test('support nesting underline colors', t => {
 });
 
 test('properly downsample underline colors', t => {
-	e.is(new Chalk({level: 3}).underlineRgb(255, 0, 0)('hello'), '\u{1B}[58;2;255;0;0mhello\u{1B}[59m');
-	e.is(new Chalk({level: 2}).underlineRgb(255, 0, 0)('hello'), '\u{1B}[58;5;196mhello\u{1B}[59m');
-	e.is(new Chalk({level: 1}).underlineRgb(255, 0, 0)('hello'), '\u{1B}[58;5;9mhello\u{1B}[59m');
-	e.is(new Chalk({level: 3}).underlineHex('#FF0000')('hello'), '\u{1B}[58;2;255;0;0mhello\u{1B}[59m');
-	e.is(new Chalk({level: 2}).underlineHex('#FF0000')('hello'), '\u{1B}[58;5;196mhello\u{1B}[59m');
-	e.is(new Chalk({level: 1}).underlineHex('#FF0000')('hello'), '\u{1B}[58;5;9mhello\u{1B}[59m');
-	e.is(new Chalk({level: 3}).underlineAnsi256(196)('hello'), '\u{1B}[58;5;196mhello\u{1B}[59m');
-	e.is(new Chalk({level: 2}).underlineAnsi256(196)('hello'), '\u{1B}[58;5;196mhello\u{1B}[59m');
-	e.is(new Chalk({level: 1}).underlineAnsi256(196)('hello'), '\u{1B}[58;5;9mhello\u{1B}[59m');
-	e.is(new Chalk({level: 1}).underlineAnsi256(2)('hello'), '\u{1B}[58;5;2mhello\u{1B}[59m');
-	e.is(new Chalk({level: 1}).underlineAnsi256(232)('hello'), '\u{1B}[58;5;0mhello\u{1B}[59m');
+	e.is(new Chalk({ level: 3 }).underlineRgb(255, 0, 0)('hello'), '\u{1B}[58;2;255;0;0mhello\u{1B}[59m');
+	e.is(new Chalk({ level: 2 }).underlineRgb(255, 0, 0)('hello'), '\u{1B}[58;5;196mhello\u{1B}[59m');
+	e.is(new Chalk({ level: 1 }).underlineRgb(255, 0, 0)('hello'), '\u{1B}[58;5;9mhello\u{1B}[59m');
+	e.is(new Chalk({ level: 3 }).underlineHex('#FF0000')('hello'), '\u{1B}[58;2;255;0;0mhello\u{1B}[59m');
+	e.is(new Chalk({ level: 2 }).underlineHex('#FF0000')('hello'), '\u{1B}[58;5;196mhello\u{1B}[59m');
+	e.is(new Chalk({ level: 1 }).underlineHex('#FF0000')('hello'), '\u{1B}[58;5;9mhello\u{1B}[59m');
+	e.is(new Chalk({ level: 3 }).underlineAnsi256(196)('hello'), '\u{1B}[58;5;196mhello\u{1B}[59m');
+	e.is(new Chalk({ level: 2 }).underlineAnsi256(196)('hello'), '\u{1B}[58;5;196mhello\u{1B}[59m');
+	e.is(new Chalk({ level: 1 }).underlineAnsi256(196)('hello'), '\u{1B}[58;5;9mhello\u{1B}[59m');
+	e.is(new Chalk({ level: 1 }).underlineAnsi256(2)('hello'), '\u{1B}[58;5;2mhello\u{1B}[59m');
+	e.is(new Chalk({ level: 1 }).underlineAnsi256(232)('hello'), '\u{1B}[58;5;0mhello\u{1B}[59m');
 
 	// The named underline colors have no basic 16-color form, so they are the same at every level.
-	e.is(new Chalk({level: 1}).underlineRed('hello'), '\u{1B}[58;5;1mhello\u{1B}[59m');
-	e.is(new Chalk({level: 2}).underlineRed('hello'), '\u{1B}[58;5;1mhello\u{1B}[59m');
+	e.is(new Chalk({ level: 1 }).underlineRed('hello'), '\u{1B}[58;5;1mhello\u{1B}[59m');
+	e.is(new Chalk({ level: 2 }).underlineRed('hello'), '\u{1B}[58;5;1mhello\u{1B}[59m');
 });
 
 test('expose the underline style names', t => {
