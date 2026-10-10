@@ -31,7 +31,10 @@ export interface Options {
 /**
 Return a new Chalk instance.
 */
-export const Chalk: new (options?: Options) => ChalkInstance; // eslint-disable-line @typescript-eslint/naming-convention
+export const Chalk: {
+	(options?: Options): ChalkInstance;
+	new (options?: Options): ChalkInstance;
+}; // eslint-disable-line @typescript-eslint/naming-convention
 
 export interface ChalkInstance {
 	(...text: unknown[]): string;
