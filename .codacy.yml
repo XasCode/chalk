@@ -1,5 +1,3 @@
 ---
 engines:
-  eslint-8:
-    exclude_paths:
-      - "source/index.d.ts"
+  eslint-8: {}

@@ -1,12 +1,6 @@
 // TODO: Make it this when TS supports that.
 // import {ModifierName, ForegroundColor, BackgroundColor, ColorName} from '#ansi-styles';
 // import {ColorInfo, ColorSupportLevel} from '#supports-color';
-import {
-	ModifierName,
-	ForegroundColorName,
-	BackgroundColorName,
-	ColorName,
-} from './vendor/ansi-styles/index.js';
 import {ColorInfo, ColorSupportLevel} from './vendor/supports-color/index.js';
 
 export interface Options {
@@ -34,7 +28,7 @@ Return a new Chalk instance.
 export const Chalk: {
 	(options?: Options): ChalkInstance;
 	new (options?: Options): ChalkInstance;
-}; // eslint-disable-line @typescript-eslint/naming-convention
+};
 
 export interface ChalkInstance {
 	(...text: unknown[]): string;
