@@ -3,3 +3,5 @@ yarn.lock
 coverage
 .nyc_output
 dist
+.secrets.*
+!.secrets.baseline

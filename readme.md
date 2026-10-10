@@ -1,17 +1,23 @@
 <h1 align="center">
-	<br>
-	<br>
-	<img width="320" src="media/logo.svg" alt="Chalk">
-	<br>
-	<br>
-	<br>
+ <br>
+ <br>
+ <img width="320" src="media/logo.svg" alt="Chalk">
+ <br>
+ <br>
+ <br>
 </h1>
 
 > Terminal string styling done right
 
-[![Coverage Status](https://codecov.io/gh/chalk/chalk/branch/main/graph/badge.svg)](https://codecov.io/gh/chalk/chalk)
-[![npm dependents](https://badgen.net/npm/dependents/chalk)](https://www.npmjs.com/package/chalk?activeTab=dependents)
-[![Downloads](https://badgen.net/npm/dt/chalk)](https://www.npmjs.com/package/chalk)
+See the [changelog](CHANGELOG.md) and [migration guide](MIGRATION.md).
+
+[![npm version](https://img.shields.io/npm/v/%40xascode%2Fchalk)](https://www.npmjs.com/package/@xascode/chalk)
+[![npm downloads](https://img.shields.io/npm/dm/%40xascode%2Fchalk)](https://www.npmjs.com/package/@xascode/chalk)
+[![Maintainability](https://qlty.sh/gh/XasCode/projects/chalk/maintainability.svg)](https://qlty.sh/gh/XasCode/projects/chalk)
+[![Code Coverage](https://qlty.sh/gh/XasCode/projects/chalk/coverage.svg)](https://qlty.sh/gh/XasCode/projects/chalk)
+[![CodeQL](https://github.com/XasCode/chalk/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/XasCode/chalk/actions/workflows/codeql-analysis.yml)
+[![Known Vulnerabilities](https://snyk.io/test/github/XasCode/chalk/badge.svg)](https://snyk.io/test/github/XasCode/chalk)
+[![codecov](https://codecov.io/gh/XasCode/chalk/branch/main/graph/badge.svg)](https://codecov.io/gh/XasCode/chalk)
 
 ![](media/screenshot.png)
 
@@ -70,9 +76,9 @@ log(chalk.red('Hello', chalk.underline.bgBlue('world') + '!'));
 
 // Nest styles of the same type even (color, underline, background)
 log(chalk.green(
-	'I am a green line ' +
-	chalk.blue.underline.bold('with a blue substring') +
-	' that becomes green again!'
+ 'I am a green line ' +
+ chalk.blue.underline.bold('with a blue substring') +
+ ' that becomes green again!'
 ));
 
 // ES2015 template literal

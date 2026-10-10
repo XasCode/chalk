@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bootstrap-sha": "480ae0b7bbafb62c665565790b4b40b4f929c137",
+  "packages": {
+    ".": {
+      "release-type": "node",
+      "package-name": "@xascode/chalk",
+      "bump-minor-pre-major": true
+    }
+  }
+}

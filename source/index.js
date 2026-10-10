@@ -42,28 +42,21 @@ const applyOptions = (object, options = {}) => {
 	object[LEVEL] = options.level === undefined ? colorLevel : options.level;
 };
 
-export class Chalk {
-	constructor(options) {
-		// eslint-disable-next-line no-constructor-return
-		return chalkFactory(options);
-	}
-}
-
 const chalkFactory = options => {
 	const chalk = (...strings) => strings.join(' ');
 	applyOptions(chalk, options);
 
-	Object.setPrototypeOf(chalk, createChalk.prototype);
+	Object.setPrototypeOf(chalk, Chalk.prototype);
 
 	return chalk;
 };
 
-function createChalk(options) {
+export function Chalk(options) {
 	return chalkFactory(options);
 }
 
-// eslint-disable-next-line unicorn/no-top-level-side-effects -- The prototype chain must be set up at module load.
-Object.setPrototypeOf(createChalk.prototype, Function.prototype);
+// The prototype chain must be set up at module load.
+Object.setPrototypeOf(Chalk.prototype, Function.prototype);
 
 for (const [styleName, style] of Object.entries(ansiStyles)) {
 	styles[styleName] = {
@@ -106,6 +99,11 @@ const createModelConverters = (model, type) => {
 
 const usedModels = ['rgb', 'hex', 'ansi256'];
 
+const createColorFunction = (converters, close) => function (first, second, third) {
+	const open = converters[this.level](first, second, third);
+	return createBuilder(this, createStyler(open, close, this[STYLER]), this[IS_EMPTY]);
+};
+
 for (const model of usedModels) {
 	const capitalizedModel = model[0].toUpperCase() + model.slice(1);
 
@@ -114,19 +112,16 @@ for (const model of usedModels) {
 		['bg' + capitalizedModel, 'bgColor'],
 		['underline' + capitalizedModel, 'underlineColor'],
 	]) {
-		const {close} = ansiStyles[type];
+		const { close } = ansiStyles[type];
 		const converters = createModelConverters(model, type);
 
 		styles[styleName] = {
 			get() {
 				// The level is read on call rather than captured here so the function can be cached on the instance instead of being reallocated on every property access.
 				// `rgb` is the widest model, so naming the three parameters avoids a rest array.
-				const styleFunction = function (first, second, third) {
-					const open = converters[this.level](first, second, third);
-					return createBuilder(this, createStyler(open, close, this[STYLER]), this[IS_EMPTY]);
-				};
+				const styleFunction = createColorFunction(converters, close);
 
-				Object.defineProperty(this, styleName, {value: styleFunction});
+				Object.defineProperty(this, styleName, { value: styleFunction });
 				return styleFunction;
 			},
 		};
@@ -134,7 +129,7 @@ for (const model of usedModels) {
 }
 
 const proto = Object.defineProperties(
-	() => {},
+	() => { },
 	{
 		...styles,
 		level: {
@@ -173,7 +168,6 @@ const createBuilder = (self, _styler, _isEmpty) => {
 	// Single argument is hot path, implicit coercion is faster than anything
 	const builder = (...arguments_) => {
 		if (arguments_.length === 1) {
-			// eslint-disable-next-line no-implicit-coercion
 			return applyStyle(builder, '' + arguments_[0]);
 		}
 
@@ -200,7 +194,7 @@ const createBuilder = (self, _styler, _isEmpty) => {
 const applyStyle = (self, string) => {
 	// Read the level directly off the generator to skip the `level` getter dispatch on this hot path
 	if (self[GENERATOR][LEVEL] <= 0 || !string) {
-		// eslint-disable-next-line unicorn/no-computed-property-existence-check -- Reads the boolean value, not a property existence check.
+		// Read the boolean value rather than checking for property existence.
 		return self[IS_EMPTY] ? '' : string;
 	}
 
@@ -210,7 +204,7 @@ const applyStyle = (self, string) => {
 		return string;
 	}
 
-	const {openAll, closeAll} = styler;
+	const { openAll, closeAll } = styler;
 	if (string.includes('\u{1B}')) {
 		while (styler !== undefined) {
 			// Replace any instances already present with a re-opening code
@@ -234,11 +228,11 @@ const applyStyle = (self, string) => {
 };
 
 // `level` lives on the prototype rather than on each instance, so it costs nothing to construct an instance and matches how builders already expose it. It is inherited rather than own, so it does not show up in `Object.keys()`, same as for a builder.
-// eslint-disable-next-line unicorn/no-top-level-side-effects -- The style getters must be installed at module load.
-Object.defineProperties(createChalk.prototype, {...styles, level: levelDescriptor});
+// The style getters must be installed at module load.
+Object.defineProperties(Chalk.prototype, { ...styles, level: levelDescriptor });
 
-const chalk = createChalk();
-export const chalkStderr = createChalk({ level: stderrColor ? stderrColor.level : 0 });
+const chalk = Chalk();
+export const chalkStderr = Chalk({ level: stderrColor ? stderrColor.level : 0 });
 
 export {
 	modifierNames,
@@ -246,12 +240,6 @@ export {
 	backgroundColorNames,
 	underlineColorNames,
 	colorNames,
-
-	// TODO: Remove these aliases in the next major version
-	modifierNames as modifiers,
-	foregroundColorNames as foregroundColors,
-	backgroundColorNames as backgroundColors,
-	colorNames as colors,
 } from './vendor/ansi-styles/index.js';
 
 export {

@@ -1,17 +1,16 @@
 name: Pull upstream
 on:
   schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron: "* 1 * * *"
+    - cron: "0 1 * * *"
 jobs:
   release_pull_request:
     runs-on: ubuntu-latest
     name: release_pull_request
     steps:
       - name: checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Create PR to branch
-        uses: xascode/github-action-sync@master
+        uses: xascode/github-action-sync@ae430d21e13530c50101ac51b5604a733c1a00a0 # master
         with:
           upstream: ${{ vars.SYNC_UPSTREAM }}
           upstream_branch: ${{ vars.SYNC_UPSTREAM_BRANCH }}

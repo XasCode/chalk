@@ -1,0 +1,7 @@
+{
+  "files.eol": "\n",
+  "sonarlint.connectedMode.project": {
+    "connectionId": "xascode",
+    "projectKey": "XasCode_chalk"
+  }
+}

@@ -16,6 +16,12 @@ test('create an isolated context where colors can be disabled (by level)', t => 
 	e.is(instance.red('foo'), '\u{1B}[31mfoo\u{1B}[39m');
 });
 
+test('Chalk is callable and preserves constructor identity', () => {
+	const instance = Chalk({ level: 1 });
+	e.is(instance.red('foo'), '\u{1B}[31mfoo\u{1B}[39m');
+	e.is(instance instanceof Chalk, true);
+});
+
 test('the `level` option should be a number from 0 to 3', t => {
 	/* eslint-disable no-new -- Ignore */
 	e.throws(() => {
