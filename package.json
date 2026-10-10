@@ -1,6 +1,6 @@
 {
 	"name": "@xascode/chalk",
-	"version": "0.1.4",
+	"version": "0.2.0",
 	"description": "Terminal string styling done right",
 	"license": "MIT",
 	"repository": "XasCode/chalk",
