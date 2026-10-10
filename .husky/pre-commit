@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+branch=$(git branch --show-current)
+if [[ "$branch" == "main" ]]; then
+    echo "Error: commits directly on 'main' are blocked." >&2
+    echo "Create and switch to a feature branch, then retry:" >&2
+    echo "  git switch -c feat/your-change" >&2
+    exit 1
+fi
+
+for tool in detect-secrets jq comm; do
+    if ! command -v "$tool" >/dev/null 2>&1; then
+        echo "Error: required system command '$tool' is not installed." >&2
+        exit 1
+    fi
+done
+
+if [ -f wordlist.txt ]; then
+    if ! command -v python >/dev/null 2>&1 || ! python -c "import ahocorasick" >/dev/null 2>&1; then
+        echo "Error: wordlist.txt requires Python and pyahocorasick." >&2
+        echo "Install it with: python -m pip install pyahocorasick" >&2
+        exit 1
+    fi
+fi
+
+scan_secrets() {
+    if [ -f wordlist.txt ]; then
+        detect-secrets scan --no-verify --word-list wordlist.txt "$@"
+    else
+        detect-secrets scan --no-verify "$@"
+    fi
+}
+
+list_secrets() {
+    jq -r '.results | to_entries[]? | .key as $file | .value[]? | "\($file),\(.hashed_secret)"' "$1" | sort
+}
+
+show_findings() {
+    jq -r '.results | to_entries[]? | .key as $file | .value[]? | "\($file):\(.line_number) (\(.type))"' "$1"
+}
+
+first_scan=
+candidate=
+baseline_list=
+candidate_list=
+cleanup() {
+    rm -f "$first_scan" "$candidate" "$baseline_list" "$candidate_list"
+}
+trap cleanup EXIT HUP INT TERM
+
+if [ ! -f .secrets.baseline ]; then
+    echo "No secrets baseline found; scanning the repository..."
+    first_scan=$(mktemp .secrets.first-run.XXXXXX)
+    scan_secrets > "$first_scan"
+    findings=$(show_findings "$first_scan")
+    if [ -n "$findings" ]; then
+        echo "Suspected secrets found. No baseline was created:" >&2
+        printf '%s\n' "$findings" >&2
+        exit 1
+    fi
+    mv "$first_scan" .secrets.baseline
+    first_scan=
+    echo "No suspected secrets found; created .secrets.baseline. Add it to version control."
+    exit 0
+fi
+
+candidate=$(mktemp .secrets.candidate.XXXXXX)
+baseline_list=$(mktemp .secrets.baseline-list.XXXXXX)
+candidate_list=$(mktemp .secrets.candidate-list.XXXXXX)
+cp .secrets.baseline "$candidate"
+scan_secrets --baseline "$candidate" >/dev/null
+list_secrets .secrets.baseline > "$baseline_list"
+list_secrets "$candidate" > "$candidate_list"
+new_secrets=$(comm -13 "$baseline_list" "$candidate_list")
+
+if [ -n "$new_secrets" ]; then
+    echo "New suspected secrets found; the existing baseline was not changed:" >&2
+    show_findings "$candidate" >&2
+    exit 1
+fi
+
+echo "No new suspected secrets found."

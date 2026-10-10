@@ -2,15 +2,10 @@
 
 import {fileURLToPath} from 'node:url';
 import {resolve, dirname} from 'node:path';
-import {defineConfig} from 'vite';
-import dts from 'vite-plugin-dts';
+import {defineConfig} from 'vitest/config';
+import dts from 'unplugin-dts/vite';
 
-import lodash from 'lodash';
 import builtinModules from 'builtin-modules';
-import commonjsExternals from 'vite-plugin-commonjs-externals';
-import pkg from './package.json';
-
-const {escapeRegExp} = lodash;
 
 const externals = [
 	'child_process',
@@ -18,9 +13,6 @@ const externals = [
 	'node:os',
 	'node:tty',
 	...builtinModules,
-	...Object.keys(pkg.dependencies).map(
-		name => new RegExp('^' + escapeRegExp(name) + '(\\/.+)?$'),
-	),
 ];
 
 export default defineConfig({
@@ -28,10 +20,12 @@ export default defineConfig({
 		lib: {
 			entry: resolve(dirname(fileURLToPath(import.meta.url)), 'source/index.js'),
 		},
-		rollupOptions: {
+		rolldownOptions: {
+			external: externals,
 			output: [
 				{
 					format: 'umd',
+					banner: `if (typeof module !== 'undefined' && module.exports && typeof process !== 'undefined' && typeof process.emitWarning === 'function') { process.emitWarning('@xascode/chalk: The CommonJS/UMD entry is deprecated; migrate to the ESM entry.', { code: 'DEP_XASCODE_CHALK_CJS', type: 'DeprecationWarning' }); }`,
 					name: 'chalk',
 					entryFileNames(_chunk) {
 						return '[name].cjs';
@@ -40,6 +34,7 @@ export default defineConfig({
 				},
 				{
 					format: 'es',
+					banner: `if (typeof module !== 'undefined' && module.exports && typeof process !== 'undefined' && typeof process.emitWarning === 'function') { process.emitWarning('@xascode/chalk: The CommonJS/UMD entry is deprecated; migrate to the ESM entry.', { code: 'DEP_XASCODE_CHALK_CJS', type: 'DeprecationWarning' }); }`,
 				},
 			],
 		},
@@ -49,18 +44,16 @@ export default defineConfig({
 	},
 	plugins: [
 		dts(),
-		commonjsExternals({
-			externals,
-		}),
 	],
 	test: {
 		coverage: {
 			provider: 'istanbul',
 			reporter: ['text', 'json', 'html', 'lcov'],
 			include: ['source'],
-			exclude: ['source/vendor'],
+			exclude: ['source/vendor', 'source/**/*.d.ts', 'source/**/__tests__/**'],
 		},
 		environment: 'node',
+		testTimeout: 20000,
 		include: ['test/**/*.js'],
 		exclude: ['test/**/_*.js'],
 	},
