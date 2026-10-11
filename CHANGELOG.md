@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/XasCode/chalk/compare/chalk-v0.2.0...chalk-v0.2.1) (2026-10-11)
+
+
+### Miscellaneous Chores
+
+* **ci:** wait for SonarCloud quality gate ([#33](https://github.com/XasCode/chalk/issues/33)) ([18ca456](https://github.com/XasCode/chalk/commit/18ca4567de123975b3242b57f7af7f9a45fdcc14))
+
 ## [0.2.0](https://github.com/XasCode/chalk/compare/chalk-v0.1.4...chalk-v0.2.0) (2026-10-10)
 
 
