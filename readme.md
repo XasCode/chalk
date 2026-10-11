@@ -13,11 +13,28 @@ See the [changelog](CHANGELOG.md) and [migration guide](MIGRATION.md).
 
 [![npm version](https://img.shields.io/npm/v/%40xascode%2Fchalk)](https://www.npmjs.com/package/@xascode/chalk)
 [![npm downloads](https://img.shields.io/npm/dm/%40xascode%2Fchalk)](https://www.npmjs.com/package/@xascode/chalk)
+
+## Badges
+
 [![Maintainability](https://qlty.sh/gh/XasCode/projects/chalk/maintainability.svg)](https://qlty.sh/gh/XasCode/projects/chalk)
 [![Code Coverage](https://qlty.sh/gh/XasCode/projects/chalk/coverage.svg)](https://qlty.sh/gh/XasCode/projects/chalk)
-[![CodeQL](https://github.com/XasCode/chalk/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/XasCode/chalk/actions/workflows/codeql-analysis.yml)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/13fd1b568a7345f1befea1dff61a1bf5)](https://app.codacy.com/gh/XasCode/chalk/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/13fd1b568a7345f1befea1dff61a1bf5)](https://app.codacy.com/gh/XasCode/chalk/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![Known Vulnerabilities](https://snyk.io/test/github/XasCode/chalk/badge.svg)](https://snyk.io/test/github/XasCode/chalk)
+[![CodeQL](https://github.com/XasCode/chalk/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/XasCode/chalk/actions/workflows/codeql-analysis.yml)
 [![codecov](https://codecov.io/gh/XasCode/chalk/branch/main/graph/badge.svg)](https://codecov.io/gh/XasCode/chalk)
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=XasCode_chalk&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=XasCode_chalk)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=XasCode_chalk&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=XasCode_chalk)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=XasCode_chalk&metric=bugs)](https://sonarcloud.io/summary/new_code?id=XasCode_chalk)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=XasCode_chalk&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=XasCode_chalk)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=XasCode_chalk&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=XasCode_chalk)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=XasCode_chalk&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=XasCode_chalk)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=XasCode_chalk&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=XasCode_chalk)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=XasCode_chalk&metric=coverage)](https://sonarcloud.io/summary/new_code?id=XasCode_chalk)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=XasCode_chalk&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=XasCode_chalk)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=XasCode_chalk&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=XasCode_chalk)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=XasCode_chalk&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=XasCode_chalk)
 
 ![](media/screenshot.png)
 
