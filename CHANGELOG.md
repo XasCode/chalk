@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/XasCode/chalk/compare/chalk-v0.2.1...chalk-v0.2.2) (2026-10-12)
+
+
+### Continuous Integration
+
+* **coderabbit:** add coderabbit config file ([#35](https://github.com/XasCode/chalk/issues/35)) ([b772567](https://github.com/XasCode/chalk/commit/b77256715b9ea177470e3683bd47481b2e372f30))
+
 ## [0.2.1](https://github.com/XasCode/chalk/compare/chalk-v0.2.0...chalk-v0.2.1) (2026-10-11)
 
 
