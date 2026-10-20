@@ -1,10 +1,9 @@
 {
 	"name": "@xascode/chalk",
 	"version": "0.2.2",
-	"description": "Terminal string styling done right",
+	"description": "Fork of chalk/chalk",
 	"license": "MIT",
 	"repository": "XasCode/chalk",
-	"funding": "https://github.com/chalk/chalk?sponsor=1",
 	"type": "module",
 	"main": "./dist/index.cjs",
 	"exports": {
